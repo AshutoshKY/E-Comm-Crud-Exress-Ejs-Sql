@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Buy Product</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+	<header class="text-gray-600 body-font mb-48">
+		<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+			<a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
+				<svg xmlns="g" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+					stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+					<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+				</svg>
+				<span class="ml-3 text-xl">E-Commerce</span>
+			</a>
+			<nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+				<!-- <a class="mr-5 hover:text-gray-900">First Link</a> -->
+			</nav>
+			<% if (logg==true) { %>
+				<a href="/Logout">
+				<button class="inline-flex items-center bg-green-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0" href="/login">Logout
+				  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+					<path d="M5 12h14M12 5l7 7-7 7"></path>
+				  </svg>
+				</button>
+			  </a>
+			  <% } else { %>
+				<a href="/login">
+				  <button class="inline-flex items-center bg-green-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0" href="/logout">Login
+					<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+					  <path d="M5 12h14M12 5l7 7-7 7"></path>
+					</svg>
+				  </button>
+				</a>
+				<% } %>
+		</div>
+	</header>
+	<div class="max-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+		<div class="relative py-3 sm:max-w-xl sm:mx-auto">
+			<div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+				<div class="max-w-md mx-auto">
+					<div class="flex items-center space-x-5">
+						<div
+							class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+							i</div>
+						<div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+							<h2 class="leading-relaxed">Confrim You Buy</h2>
+							<p class="text-sm text-gray-500 font-normal leading-relaxed">
+								......................................................................</p>
+						</div>
+					</div>
+					<form action="/buy" method="post">
+						<div class="divide-y divide-gray-200">
+							<div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+								<div class="flex flex-col">
+									<label class="leading-loose">Address</label>
+									<input type="text" name="addr"
+										class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+										placeholder="Event title">
+								</div>
+								<div class="flex flex-col">
+									<label class="leading-loose">Quantity</label>
+									<input type="number" name="quantity"
+										class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+										placeholder="1..2..3" required>
+								</div>
+							</div>
+							<div class="divide-y divide-gray-200">
+								<div class="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+									<div class="flex flex-col">
+										<div class="mb-3 w-full">
+											<select data-te-select-init name="mode">
+												<option value="0">Pre-Paid</option>
+												<option value="1">Post_paid</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="pt-4 flex items-center space-x-4">
+								<button type="submit" value="buy"
+									class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">BUY</button>
+							</div>
+							<input type="hidden" name="p_id" value="<%=id%>">
+						</div>
+				</div>
+				<span style="color:red; font-size: xx-large; margin-left:80px;"><i><%= ordered %></i></span>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

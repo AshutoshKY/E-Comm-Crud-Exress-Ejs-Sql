@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Product</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <header class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl">E-Commerce</span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <% if (logg==true) { %>
+          <a class="mr-5 hover:text-gray-900 text-lg " href="/view_order"><button class="inline-flex items-center bg-black text-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">ORDERS</button></a>
+          <% } %>
+      </nav>
+      <% if (logg==true) { %>
+        <a href="/Logout">
+        <button class="inline-flex items-center bg-green-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0" href="/login">Logout
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </a>
+      <% } else { %>
+        <a href="/login">
+          <button class="inline-flex items-center bg-green-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0" href="/logout">Login
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </a>
+        <% } %>
+    </div>
+  </header>
+      <div class="w-1/2 justify-center max-w-xl bg-white border ml-48 mt-12 border-gray-200 rounded-xl shadow dark:bg-gray-600 dark:border-gray-700">
+        <% results.forEach((result)=>{ %>
+          <img class="p-8 rounded-xl ml-36" src="https://source.unsplash.com/random/200x200?sig=2" alt="product image" />
+        <div class="px-5 pb-5">
+            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white pb-2"><%=result.name%></h5>
+            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"><%=result.des%></h5>
+          <div class="flex items-center justify-between pt-8">
+            <span class="text-2xl font-semibold text-gray-900 dark:text-white mx-2" style="text-decoration: line-through;">Rs <%=result.price%></span>
+            <span class="text-2xl font-bold text-gray-900 dark:text-white mx-2">Rs <%=result.sale_price%></span>
+            <% if (result.quantity > 0) { %>
+              <span class="text-2xl font-semibold text-gray-900 dark:text-white mx-4">Quantity : <%=result.quantity%></span>
+              <% } else { %>
+              <span class="text-2xl font-semibold text-gray-900 dark:text-white mx-4">Quantity : OUT of STOCK</span>
+              <% } %>
+            <!-- <span class="text-1xl font-semibold text-gray-900 dark:text-white mx-4">Quantity : <%=result.quantity%></span>s -->
+            <% if (result.quantity > 0) { %>
+            <a href="/checkout/<%=result.id%>"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buy
+              Now</a>
+              <% } else { %>
+                <a href="/checkout/<%=result.id%>" style="pointer-events: none"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Come Back Later</a>
+                <% } %>
+          </div>
+        </div>
+        <%})%>
+        <div class="flex items-center justify-between py-8 px-56 justify-center">
+          <a href="/"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Go Back</a>
+      </div>
+      </div>
+</body>
+
+</html>

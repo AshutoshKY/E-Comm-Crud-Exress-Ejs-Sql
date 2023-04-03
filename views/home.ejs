@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Homepage</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <header class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl">E-Commerce</span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <% if (logg==true) { %>
+        <a class="mr-5 hover:text-gray-900 text-lg " href="/view_order"><button class="inline-flex items-center bg-black text-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">ORDERS</button></a>
+        <% } %>
+      </nav>
+      <% if (logg==true) { %>
+      <a href="/Logout">
+      <button class="inline-flex items-center bg-green-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0" href="/login">Logout
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </a>
+    <% } else { %>
+      <a href="/login">
+        <button class="inline-flex items-center bg-green-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0" href="/logout">Login
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </a>
+      <% } %>
+
+    </div>
+  </header>
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap m-4">
+        <% for(var i=0; i< results.length ; i++){ %>
+          <div class="lg:w-1/3 md:w-1/2 p-4 w-full text-center border-2 border-sky-300 bg-sky-100 rounded-2xl" onclick="location.href='http://localhost:3000/details/<%=results[i].id%>'">
+            <a class="block relative h-48 rounded overflow-hidden" >
+              <img alt="ecommerce" class="object-cover object-center w-5/6 ml-12 h-full block rounded-2xl"
+                src="https://source.unsplash.com/random/200x200?sig=<%=results[i].id%>">
+            </a>
+            <div class="mt-4">
+              <h3 class="text-gray-500 text-l tracking-widest title-font mb-1">
+                <%=results[i].type%>
+              </h3>
+              <h2 class="text-gray-900 title-font text-2xl font-medium">
+                <%=results[i].name%>
+              </h2>
+              <span style="text-decoration: line-through;" class="text-lg"><b>
+                  <%=results[i].price%>
+                </b></span>
+              <span class="mt-1 text-lg"><b>
+                  <%=results[i].sale_price%>
+                </b></span><br>
+                <div class="my-4">
+                <% if (results[i].quantity > 0) { %>
+                  <a href="/checkout/<%=results[i].id%>"
+                    class="text-white bg-blue-500 mt-12 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buy
+                    Now</a>
+                    <% } else { %>
+                      <a href="/checkout/<%=results[i].id%>" style="pointer-events: none"
+                        class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Out of Stock</a>
+                      <% } %>
+                    </div>
+              <!-- <a href="checkout/<%=results[i].id%>"><button type="button" class="mt-1 text-xl center">Buy now</button></a> -->
+            </div>
+          </div>
+          <%}%>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
